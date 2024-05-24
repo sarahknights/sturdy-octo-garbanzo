@@ -14,6 +14,9 @@ Create an efficient way to objectively compare KPIs across the portfolio of game
 ## Proposed Implementation
 
 The data currently exists in AWS Redshift, in a raw but valid format. Each game studio has their own database, and each game has it’s own schema with in-game telemetry stored in separate tables according to event type within that schema.
+
+![Image showing a sample of the source data structure](PS-4.png)
+
 Data will be collected from our raw data sources, loaded and then transformed at the destination. Given we are dealing with high-volume datasets that require frequent loading, an ELT approach is much more efficient as the target KPI database has the processing power to perform the transformations at the analytics stage.
 
 A key concern within this project is the format and structure of the source data. Schemas are highly likely to be very different and a tool is required that is capable of adapting to different configurations and future changes. Additionally, there may be differences in the types of telemetry data that exists between gaming platforms.
@@ -25,7 +28,10 @@ AWS Glue is able to automatically discover the schema of the source tables compe
 CloudWatch monitors the Glue pipelines that load the data into the KPI database [4], triggering dbt procedures [5] where necessary to normalise and combine the data into centralised tables to ensure all downstream systems have consistent data across all game studios and games [6]. CloudWatch is also able to log and monitor the application.
 
 Utilising the Glue Data Catalog, data lineage can be preserved and metadata stored. This can then inform the dashboard output, for example Amazon Athena [7].
-Metrics and Dashboards
+
+![Image showing the proposed architecture setup](ELT-6.png)
+
+## Metrics and Dashboards
 
 Performance metrics to be implemented to ensure downstream dashboards and reporting outputs are accessible and available. There should be consideration to snapshot datasets should latency occur.
 
