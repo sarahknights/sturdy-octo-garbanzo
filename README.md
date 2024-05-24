@@ -44,6 +44,7 @@ Ensure that relevant source data already exists across all games, across all gen
 ## Alternatives
 
 This proposal promotes the use of products from within the AWS ecosystem, primarily because of ease of integration and security. However, there are many other 3rd party options available. There are also other services provided by AWS, such as Kinesis which could be considered.
+
 Consideration should also be made as to whether an ETL or ELT approach should be taken. This proposal focuses on an ELT strategy based on the assumed quantity and quality of data to be ingested.
 
 ## Potential Impact and Dependencies
