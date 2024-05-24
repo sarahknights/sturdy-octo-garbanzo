@@ -1,17 +1,17 @@
-#RFC: Create a set of common KPIs [WIP]
+# RFC: Create a set of common KPIs [WIP]
 
-##Authors:
-@sarahknights
+## Authors:
+- @sarahknights
 
-Executive Summary
+## Executive Summary
 
 Create a set of common KPIs across all of PlayStation Studios games based on data from a variety of data sources, including in game telemetry, console platform data, and stream platform data.
 
-Motivation
+## Motivation
 
 Create an efficient way to objectively compare KPIs across the portfolio of games within Playstation Studios to inform future products and key business stakeholders across the business.
 
-Proposed Implementation
+## Proposed Implementation
 
 The data currently exists in AWS Redshift, in a raw but valid format. Each game studio has their own database, and each game has it’s own schema with in-game telemetry stored in separate tables according to event type within that schema.
 Data will be collected from our raw data sources, loaded and then transformed at the destination. Given we are dealing with high-volume datasets that require frequent loading, an ELT approach is much more efficient as the target KPI database has the processing power to perform the transformations at the analytics stage.
@@ -31,31 +31,31 @@ Performance metrics to be implemented to ensure downstream dashboards and report
 
 Monitoring with CloudWatch against the AWS Glue pipelines will identify job failures, latency and resource consumption at a granular level.
 
-Drawbacks
+## Drawbacks
 
 Ensure that relevant source data already exists across all games, across all genres and is platform-independent. Validate the reporting KPI outputs with the key business stakeholders to ensure the provision of the implementation aligns with the business need.
 
-Alternatives
+## Alternatives
 
 This proposal promotes the use of products from within the AWS ecosystem, primarily because of ease of integration and security. However, there are many other 3rd party options available. There are also other services provided by AWS, such as Kinesis which could be considered.
 Consideration should also be made as to whether an ETL or ELT approach should be taken. This proposal focuses on an ELT strategy based on the assumed quantity and quality of data to be ingested.
 
-Potential Impact and Dependencies
+## Potential Impact and Dependencies
 
-Impact
-Future modification to source schemas may need to be reviewed to ensure ongoing successful integration
-Persistent access to source schemas will need to be provided and maintained
-Dependencies
-The data is already available in AWS Redshift
-There is a single AWS Redshift cluster containing all game studio databases
-All game studio database types are supported by AWS Glue
-All game data to be ingested requires user sign in to either SEN or PSN
+### Impact
+- Future modification to source schemas may need to be reviewed to ensure ongoing successful integration
+- Persistent access to source schemas will need to be provided and maintained
+### Dependencies
+- The data is already available in AWS Redshift
+- There is a single AWS Redshift cluster containing all game studio databases
+- All game studio database types are supported by AWS Glue
+- All game data to be ingested requires user sign in to either SEN or PSN
 
-Unresolved Questions
+## Unresolved Questions
 
-Should we incrementally load data in batches or stream continual changes through the pipeline?
-How are the reporting KPIs generated? Is that out of scope for this RFC?
+- Should we incrementally load data in batches or stream continual changes through the pipeline?
+- How are the reporting KPIs generated? Is that out of scope for this RFC?
 
-Conclusion
+## Conclusion
 
 Collating data from disparate systems into a centralised structure is likely to have additional benefits than just those defined in this user story. Utilising an approach which allows scalability and extensibility ensures building a tool that is future-proofed and that can provide the bedrock for similar projects and requests.
